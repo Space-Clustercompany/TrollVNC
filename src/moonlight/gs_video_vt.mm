@@ -26,9 +26,9 @@ static void vt_cb(void *ref, void *srcRefCon, OSStatus st, VTEncodeInfoFlags inf
       self->_vps=[NSData dataWithBytes:vps length:lv]; self->_sps=[NSData dataWithBytes:sps length:ls]; self->_pps=[NSData dataWithBytes:pps length:lp];
     }
     uint8_t b[4]={0,0,0,1};
-    if (self.onNALU){ if(self->_vps){ self.onNALU(b,4,NO); self.onNALU((const uint8_t*)self->_vps.bytes,self->_vps.length,NO); }
-      self.onNALU(b,4,NO); self.onNALU((const uint8_t*)self->_sps.bytes,self->_sps.length,NO);
-      self.onNALU(b,4,NO); self.onNALU((const uint8_t*)self->_pps.bytes,self->_pps.length,NO); }
+    if (self.onNALU){ if(self->_vps){ self.onNALU(b,4,NO); self.onNALU((const uint8_t*)(const uint8_t*)self->_vps.bytes,self->_vps.length,NO); }
+      self.onNALU(b,4,NO); self.onNALU((const uint8_t*)(const uint8_t*)self->_sps.bytes,self->_sps.length,NO);
+      self.onNALU(b,4,NO); self.onNALU((const uint8_t*)(const uint8_t*)self->_pps.bytes,self->_pps.length,NO); }
   }
   CMBlockBufferRef bb = CMSampleBufferGetDataBuffer(sbuf);
   size_t off=0,total=CMBlockBufferGetDataLength(bb);
