@@ -21,7 +21,7 @@ SRCS=(
 )
 
 CXXFLAGS=( -isysroot "$SDK" -arch arm64 -fobjc-arc -std=c++17 -ObjC++ -I./src )
-LDFLAGS=( -framework UIKit -framework Foundation )
+LDFLAGS=( -framework UIKit -framework Foundation -framework CoreGraphics )
 
 echo "==> Compiling $APP_NAME"
 "$CXX" "${CXXFLAGS[@]}" "${SRCS[@]}" "${LDFLAGS[@]}" -o "$APP_DIR/$APP_NAME"
