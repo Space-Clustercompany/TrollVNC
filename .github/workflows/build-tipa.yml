@@ -1,0 +1,24 @@
+name: build-tipa
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ feature/trollstore-app, main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: |
+          brew update
+          brew install ldid
+      - name: Build .tipa
+        run: |
+          bash scripts/build_tipa.sh
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MoonlightServer-tipa
+          path: build/MoonlightServer.tipa
